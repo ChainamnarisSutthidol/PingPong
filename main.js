@@ -27,9 +27,12 @@ function setup(){
   video=createCapture(VIDEO);
     video.size(380, 380);
     video.hide();
+    poseNet=ml5.poseNet(video, modelLoaded);
+    poseNet.on('pose', gotPoses);
 }
 
 function modelLoaded(){
+
   console.log('Model Loaded!');
 }
 
