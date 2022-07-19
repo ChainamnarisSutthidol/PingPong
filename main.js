@@ -1,4 +1,6 @@
-
+rightwristX=0;
+rightwristY=0;
+rightwristScore=0;
 /*created by prashant shukla */
 
 var paddle2 =10,paddle1=10;
@@ -34,6 +36,19 @@ function setup(){
 function modelLoaded(){
 
   console.log('Model Loaded!');
+}
+
+function gotPoses(){
+  poseNet.on('pose', gotPoses);
+}
+function gotResults(){
+  if(results.length>0){
+    rightwristX=results[0].pose.wrist.x;
+		rightwristY=results[0].pose.wrist.y;
+    rightwristScore=rightwristScore;
+  }
+
+
 }
 
 function draw(){
@@ -75,6 +90,12 @@ function draw(){
    
    //function move call which in very important
     move();
+
+    if(rightwristScore>0.2){
+      fill("#851ddc");
+      stroke("#851ddc");
+      circle(rightwristX,rightwristY, 20);
+    }
 }
 
 
