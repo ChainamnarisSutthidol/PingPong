@@ -25,6 +25,7 @@ var ball = {
 
 function setup(){
   var canvas =  createCanvas(700,600);
+  game_status="";
   canvas.parent('canvas')
   video=createCapture(VIDEO);
     video.size(380, 380);
@@ -51,51 +52,59 @@ function gotResults(){
 
 }
 
+function startGame(){
+  game_status="start";
+  document.getElementById("status").innerHTML="Game is Loaded";
+}
+
 function draw(){
-  image(video, 0, 0, 700, 600);
- background(0); 
-
- fill("black");
- stroke("black");
- rect(680,0,20,700);
-
- fill("black");
- stroke("black");
- rect(0,0,20,700);
- 
-   //funtion paddleInCanvas call 
-   paddleInCanvas();
- 
-   //left paddle
-   fill(250,0,0);
-    stroke(0,0,250);
-    strokeWeight(0.5);
-   paddle1Y = mouseY; 
-   rect(paddle1X,paddle1Y,paddle1,paddle1Height,100);
+  if(game_status=="start"){
+    image(video, 0, 0, 700, 600);
+    background(0); 
    
+    fill("black");
+    stroke("black");
+    rect(680,0,20,700);
    
-    //pc computer paddle
-    fill("#FFA500");
-    stroke("#FFA500");
-   var paddle2y =ball.y-paddle2Height/2;  rect(paddle2Y,paddle2y,paddle2,paddle2Height,100);
+    fill("black");
+    stroke("black");
+    rect(0,0,20,700);
     
-    //function midline call
-    midline();
+      //funtion paddleInCanvas call 
+      paddleInCanvas();
     
-    //funtion drawScore call 
-   drawScore();
+      //left paddle
+      fill(250,0,0);
+       stroke(0,0,250);
+       strokeWeight(0.5);
+      paddle1Y = mouseY; 
+      rect(paddle1X,paddle1Y,paddle1,paddle1Height,100);
+      
+      
+       //pc computer paddle
+       fill("#FFA500");
+       stroke("#FFA500");
+      var paddle2y =ball.y-paddle2Height/2;  rect(paddle2Y,paddle2y,paddle2,paddle2Height,100);
+       
+       //function midline call
+       midline();
+       
+       //funtion drawScore call 
+      drawScore();
+      
+      //function models call  
+      models();
+      
+      //function move call which in very important
+       move();
    
-   //function models call  
-   models();
-   
-   //function move call which in very important
-    move();
-
-    if(rightwristScore>0.2){
-      fill("#851ddc");
-      stroke("#851ddc");
-      circle(rightwristX,rightwristY, 20);
-    }
+       if(rightwristScore>0.2){
+         fill("#851ddc");
+         stroke("#851ddc");
+         circle(rightwristX,rightwristY, 20);
+       }
+  }
+ 
 }
 
 
